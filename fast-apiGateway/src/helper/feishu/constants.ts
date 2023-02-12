@@ -1,5 +1,8 @@
-const APP_ID = 'cli_a36d008130f8d00b';
-const APP_SECRET = 'dis7n5PKQX7DxHruJEEJGbpKSFld5d2M';
+import { getConfig } from 'src/utils';
+
+const feishuConfig = getConfig().FEISHU_CONFIG;
+const APP_ID = feishuConfig.FEISHU_APP_ID;
+const APP_SECRET = feishuConfig.FEISHU_APP_SECRET;
 
 export {
   APP_ID,
