@@ -10,7 +10,7 @@ const BUSINESS_ERROR_CODE = {
   // 用户已冻结
   USER_DISABLED: 10004,
 };
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus } from "@nestjs/common";
 
 type BusinessError = {
   code: number;
@@ -19,7 +19,7 @@ type BusinessError = {
 
 export class BusinessException extends HttpException {
   constructor(err: BusinessError | string) {
-    if (typeof err === 'string') {
+    if (typeof err === "string") {
       err = {
         code: BUSINESS_ERROR_CODE.COMMON,
         message: err,
@@ -31,7 +31,7 @@ export class BusinessException extends HttpException {
   static throwForbidden() {
     throw new BusinessException({
       code: BUSINESS_ERROR_CODE.ACCESS_FORBIDDEN,
-      message: '抱歉哦，您无此权限！',
+      message: "抱歉哦，您无此权限！",
     });
   }
 }

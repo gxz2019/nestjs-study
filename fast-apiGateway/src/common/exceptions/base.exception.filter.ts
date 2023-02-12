@@ -1,5 +1,11 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, ServiceUnavailableException } from "@nestjs/common";
-import { FastifyReply, FastifyRequest } from 'fastify';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+  ServiceUnavailableException,
+} from "@nestjs/common";
+import { FastifyReply, FastifyRequest } from "fastify";
 
 @Catch()
 class AllExceptionsFilter implements ExceptionFilter {
@@ -14,10 +20,8 @@ class AllExceptionsFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: request.url,
       message: new ServiceUnavailableException().getResponse(),
-    })
+    });
   }
 }
 
-export {
-  AllExceptionsFilter,
-}
+export { AllExceptionsFilter };

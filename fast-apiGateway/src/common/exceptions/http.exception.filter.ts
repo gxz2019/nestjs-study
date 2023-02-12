@@ -5,8 +5,8 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-} from '@nestjs/common';
-import { BusinessException } from './business.exception';
+} from "@nestjs/common";
+import { BusinessException } from "./business.exception";
 
 @Catch(HttpException)
 class HttpExceptionFilter implements ExceptionFilter {
@@ -20,11 +20,11 @@ class HttpExceptionFilter implements ExceptionFilter {
       const error = exception.getResponse();
       response.status(HttpStatus.OK).send({
         data: null,
-        status: error['code'],
+        status: error["code"],
         extra: {},
-        message: error['message'],
+        message: error["message"],
         success: false,
-      })
+      });
     }
 
     response.status(status).send({
@@ -36,6 +36,4 @@ class HttpExceptionFilter implements ExceptionFilter {
   }
 }
 
-export {
-  HttpExceptionFilter,
-}
+export { HttpExceptionFilter };

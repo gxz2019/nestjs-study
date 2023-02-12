@@ -1,13 +1,13 @@
-import axios, { Method } from 'axios';
-import { getConfig } from './env';
+import axios, { Method } from "axios";
+import { getConfig } from "./env";
 
 //common request
 const request = async ({ url, options = {} }) => {
   try {
-    return axios.request({url, ...options});
+    return axios.request({ url, ...options });
   } catch (err) {
     throw err;
-  };
+  }
 };
 
 interface Options {
@@ -20,14 +20,14 @@ interface Options {
 
 //request for contact feishu
 const requestFeishu = (options: Options) => {
-  const { url, method = 'GET', headers, params, query } = options;
+  const { url, method = "GET", headers, params, query } = options;
   const sendUrl = url || getConfig()?.FEISHU_CONFIG.FEISHU_URL;
   return async () => {
     try {
       const res = await axios({
         url: sendUrl,
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          "Content-Type": "application/json; charset=utf-8",
           ...headers,
         },
         method,
@@ -38,14 +38,11 @@ const requestFeishu = (options: Options) => {
       return {
         data,
         code: status,
-      }
+      };
     } catch (error) {
       throw error;
     }
-  }
-}
+  };
+};
 
-export {
-  request,
-  requestFeishu,
-} 
+export { request, requestFeishu };
