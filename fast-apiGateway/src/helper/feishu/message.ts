@@ -30,7 +30,7 @@ const sendMessagesToFeiShu = async (
   params: MESSAGES_PARAMS,
   app_token: string
 ) => {
-  const res: any = await requestFeishu({
+  const res = await requestFeishu({
     url: `/im/v1/messages`,
     method: "POST",
     query: { receive_id_type },
