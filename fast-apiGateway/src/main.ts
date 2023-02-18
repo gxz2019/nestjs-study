@@ -7,7 +7,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
-import { VersioningType, VERSION_NEUTRAL } from "@nestjs/common";
+import { VersioningType, VERSION_NEUTRAL, ValidationPipe } from "@nestjs/common";
 import { generateDocument } from "./doc";
 
 declare const module: any;
@@ -32,6 +32,9 @@ async function bootstrap() {
 
   //创建文档
   generateDocument(app);
+  
+  //全局字段校验
+  app.useGlobalPipes(new ValidationPipe())
 
   //添加热更新
   if (module.hot) {
