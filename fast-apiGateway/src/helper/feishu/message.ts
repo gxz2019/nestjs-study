@@ -10,13 +10,13 @@ enum RECEIVE_TYPE {
 enum MSG_TYPE {
   text = 'text',
   post = 'post',
-  image= 'image',
-  file= 'file',
-  audio= 'audio',
-  media= 'media',
-  sticker= 'sticker',
-  interactive= 'interactive',
-  share_chat= 'share_chat',
+  image = 'image',
+  file = 'file',
+  audio = 'audio',
+  media = 'media',
+  sticker = 'sticker',
+  interactive = 'interactive',
+  share_chat = 'share_chat',
   share_user = 'share_user',
 }
 type MESSAGES_PARAMS = {
@@ -30,15 +30,20 @@ const sendMessagesToFeiShu = async (
   params: MESSAGES_PARAMS,
   app_token: string
 ) => {
-  const res = await requestFeishu({
-    url: `/im/v1/messages`,
-    method: "POST",
-    query: { receive_id_type },
-    params,
-    headers: {
-      Authorization: `Bearer ${app_token}`,
-    },
-  });
+  let res = null;
+  try {
+    res = await requestFeishu({
+      url: `/im/v1/messages`,
+      method: "POST",
+      query: { receive_id_type },
+      params,
+      headers: {
+        Authorization: `Bearer ${app_token}`,
+      }
+    })
+  } catch (err) {
+    console.log(err, 'send request to feishu failed');
+  }
   return res.data;
 };
 
