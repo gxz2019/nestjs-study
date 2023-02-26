@@ -2,8 +2,7 @@ import { RECEIVE_TYPE, MSG_TYPE } from "src/helper/feishu";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsEnum } from "class-validator";
 
-
-export class FeishuMessageDto {
+class FeishuMessageDto {
   @IsNotEmpty()
   @IsEnum(RECEIVE_TYPE)
   @ApiProperty({ example: "email", enum: RECEIVE_TYPE })
@@ -21,4 +20,14 @@ export class FeishuMessageDto {
   @IsEnum(MSG_TYPE)
   @ApiProperty({ example: "text", enum: MSG_TYPE })
   msg_type?: MSG_TYPE;
+}
+
+class FeishuTokenDto {
+  @ApiProperty({ example: "xxxx", description: 'feishu code'})
+  code: string;
+}
+
+export {
+  FeishuMessageDto,
+  FeishuTokenDto,
 }

@@ -9,13 +9,18 @@ import {
 } from "@nestjs/platform-fastify";
 import { VersioningType, VERSION_NEUTRAL, ValidationPipe } from "@nestjs/common";
 import { generateDocument } from "./doc";
+// import { CustomizeLogger } from './common/logger';
 
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter()
+    new FastifyAdapter(
+      {
+        logger: true
+      }
+    )
   );
 
   //接口版本化管理

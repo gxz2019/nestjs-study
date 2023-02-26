@@ -4,24 +4,24 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { UserModule } from "./user/user.module";
 import { getConfig } from "./utils";
-import { redisStore } from 'cache-manager-redis-store';
+import * as redisStore from 'cache-manager-redis-store';
 
 const config = {
   socket: {
     host: getConfig('REDIS_CONFIG').host,
     port: getConfig('REDIS_CONFIG').port,
   },
-  //@ts-ignore
   db: getConfig('REDIS_CONFIG').db,
-  // ttl: 600
 }
 
 @Module({
   imports: [
     CacheModule.register({
       isGlobal: true,
-      //@ts-ignore
-      store: async () => await redisStore(config),
+      store: redisStore,
+      host: getConfig('REDIS_CONFIG').host,
+      port: getConfig('REDIS_CONFIG').port,
+      db: getConfig('REDIS_CONFIG').db,
     }),
     ConfigModule.forRoot({
       ignoreEnvFile: true,
