@@ -5,7 +5,7 @@ const UserProviders = [
     provide: 'USER_REPOSITORY',
     useFactory: async (AppDataSource) => {
       try {
-        return await AppDataSource.getRepository(User)
+        return await AppDataSource?.getRepository(User)
       } catch (err) {
         console.log(err, 'Error getting')
       }

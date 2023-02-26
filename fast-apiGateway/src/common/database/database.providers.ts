@@ -20,12 +20,14 @@ const DatabaseProviders = [
   {
     provide: 'MONGODB_DATA_SOURCE',
     useFactory: async () => {
-      try {
-        await MONGODB_DATA_SOURCE.initialize();
-        console.log('"Connection initialized with mongodb database...";')
-        return MONGODB_DATA_SOURCE;
-      } catch (e) {
-        console.log(e)
+      if (!MONGODB_DATA_SOURCE.isInitialized) {
+        try {
+          await MONGODB_DATA_SOURCE.initialize();
+          console.log('"Connection initialized with mongodb database...";')
+          return MONGODB_DATA_SOURCE;
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   }

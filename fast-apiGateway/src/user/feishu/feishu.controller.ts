@@ -5,7 +5,7 @@ import {
   Version,
   VERSION_NEUTRAL,
 } from "@nestjs/common";
-import { FeishuMessageDto } from "./feishu.dto";
+import { FeishuMessageDto, FeishuTokenDto } from "./feishu.dto";
 import { FeiShuService } from "./feishu.service";
 
 @Controller("feishu")
@@ -18,6 +18,14 @@ class FeiShuController {
     const { receive_id_type, ...rest } = parmas;
     return this.feiShuService.sendMessage(receive_id_type, rest);
   }
+
+  @Version([VERSION_NEUTRAL])
+  @Post("getUserToken")
+  getUserToken(@Body() parmas: FeishuTokenDto) {
+    const { code } = parmas;
+    return this.feiShuService.getUserToken(code);  
+  }
+
 }
 
 export { FeiShuController };
