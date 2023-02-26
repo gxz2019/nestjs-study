@@ -43,9 +43,9 @@ class FeiShuService {
               'APP_TOKEN_CACHE_KEY',
               appToken,
               {
-                ttl: (expire - 60) * 1000 //redis's ttl  unit s, cacheManager's ttl unit us
-              }
-            );
+                ttl: expire - 60,
+              },
+            ); 
           } catch (error) {
             console.log(error, 'set new feishu token to cache failed');
           }
